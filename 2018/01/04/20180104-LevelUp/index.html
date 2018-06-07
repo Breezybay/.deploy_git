@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Level Up 读书笔记 | Breezy Bay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="第五章之前有很多精彩实用的内容，但从第五章起很多都是像百科一样在罗列一些比较基本的东西了。  Game Designers have more Fun">
+<meta name="keywords" content="读书笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Level Up 读书笔记">
+<meta property="og:url" content="/2018/01/04/20180104-LevelUp/index.html">
+<meta property="og:site_name" content="Breezy Bay">
+<meta property="og:description" content="第五章之前有很多精彩实用的内容，但从第五章起很多都是像百科一样在罗列一些比较基本的东西了。  Game Designers have more Fun">
+<meta property="og:updated_time" content="2018-06-06T09:22:32.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Level Up 读书笔记">
+<meta name="twitter:description" content="第五章之前有很多精彩实用的内容，但从第五章起很多都是像百科一样在罗列一些比较基本的东西了。  Game Designers have more Fun">
+    
+
+    
+
+    
+        <link rel="icon" href="/img/logo40.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Breezy Bay</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/games">Games</a>
+                
+                    <a class="main-nav-link" href="/misc">Misc</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/img/Ruby_idle_214.png" />
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/games">Games</a></td>
+                
+                    <td><a class="main-nav-link" href="/misc">Misc</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/img/Ruby_idle_214.png" />
+            <h2 id="name">甩萝卜兔 (Robotu)</h2>
+            <h3 id="title">Game Developer</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Hangzhou, China</span>
+            <!-- <a id="follow" target="_blank" href="">关注</a> -->
+        </div>
+<!--         <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                4
+                <span>标签</span>
+            </div>
+        </div> -->
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://www.linkedin.com/in/arnfinch/" target="_blank" title="linkedin" class=tooltip>
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://weibo.com/arnzhan" target="_blank" title="weibo" class=tooltip>
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-20180104-LevelUp" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Level Up 读书笔记
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/01/04/20180104-LevelUp/">
+            <time datetime="2018-01-03T16:00:00.000Z" itemprop="datePublished">2018-01-04</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/读书笔记/">读书笔记</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>第五章之前有很多精彩实用的内容，但从第五章起很多都是像百科一样在罗列一些比较基本的东西了。</p>
+<hr>
+<p>Game Designers have more Fun</p>
+<a id="more"></a>
+<h5 id="Team"><a href="#Team" class="headerlink" title="Team"></a>Team</h5><p><strong>Development Team</strong><br>Programmer Artist Designer Producer Tester Composer Sound Designer Writer</p>
+<p><strong>Publising Positions</strong><br>Product Manager, Creative Manager, Art Director, Technical Director,  Business Development Staff, Lawyer, QA Manager…</p>
+<h5 id="Ideas"><a href="#Ideas" class="headerlink" title="Ideas"></a>Ideas</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Many game ideas often sound stupid ... never dismiss a game idea, even if it does sound stupid.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">List of things to do to get inspired:</div><div class="line"></div><div class="line">1. Read something you normally wouldn&apos;t read.</div><div class="line">2. Take a walk, drive or shower.</div><div class="line">3. Attend a lecture.</div><div class="line">4. Play a game, preferably a bad one. Sometimes it takes several iterations on an idea before it works successfully.</div><div class="line">5. Regardless of the above, follow your passion.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">... all good game characters are wish fulfillment. They give the player a chance to be something they aren&apos;t in the real world.</div><div class="line">Games should make players feel something that they aren&apos; t in the real world: powerful, smart, sneaky, successful, rich, bad, or heroic.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">**The Theory of Un-Fun** states: start with a &quot;fun&quot; idea. As you develop the game, if you find something in the game that is not fun (or un-fun), then remove it.</div><div class="line">When you have removed all of the un-fun, then all that should be left is the fun.</div></pre></td></tr></table></figure>
+<h5 id="Story"><a href="#Story" class="headerlink" title="Story"></a>Story</h5><p><strong>Production Triangle</strong>: Choose Two [Time, Quality, Money]</p>
+<p><strong>The Triangle of Weirdness</strong>: Choose One [Chatacters, Activities, World]</p>
+<p><strong>Title</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1. **The literal title** makes it easy to figure out where the title came from. It can be the name of your main character...It can be the main location of your game...Or you can name your game after a gameplay activity or component...</div><div class="line">2. **The action/cool title** is a title that captures the spirit of the game without mentioning any of the game characters or locations. I think games like Darksiders, Brutal Legend, and Gears of War all have cool titles.</div><div class="line">3. **The punny title** is a title that makes you appreciate the cleverness of the title. Just Cause, Half Life, and System Shock are all good examples of punny titles...</div><div class="line">4. **The &quot;purple cow&quot; title** is one that makes your customer stop in their tracks and stare...LittleBigPlanet, Far Cry, and Resident Evil. The advantage to a purple cow title is...It&apos;s going to be a long time before anyone thinks of using the word Halo in their game title...</div><div class="line"></div><div class="line">...shorter titles are better than longer ones...keep them to two or three syllables like Star Wars, Don-kee Kong, Pac-Man or Hey-lo.</div></pre></td></tr></table></figure></p>
+<h5 id="Paperwork"><a href="#Paperwork" class="headerlink" title="Paperwork"></a>Paperwork</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Making games is like making chili</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">the first rule of responsible game design: love thy player</div></pre></td></tr></table></figure>
+<h5 id="Game-Design-Document-GGD"><a href="#Game-Design-Document-GGD" class="headerlink" title="Game Design Document (GGD)"></a>Game Design Document (GGD)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">The goal of great game design documentation is communication:</div><div class="line">communication to the player, to your team members, and to your publishing partners.</div></pre></td></tr></table></figure>
+<p>####### One-Sheet<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">1.Game title</div><div class="line">2.Intended game systems</div><div class="line">3.Target age of players</div><div class="line">4.Intended Entertainment Software Rating Board (ESRB) rating</div><div class="line">5.A summary of the game ’ s story, focusing on gameplay</div><div class="line">6.Distinct modes of gameplay</div><div class="line">7.Unique selling points</div><div class="line">8.Competitive products.</div></pre></td></tr></table></figure></p>
+<p>####### Ten-Pager<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Production Team | Marketing/Executives</div><div class="line">Provide clear diagrams of gameplay | Show exciting conceptual images</div><div class="line">Use short, punchy sentences | Text in bullet points form</div><div class="line">Use specific terminology to get your intention clearly across | Use vivid, descriptive examples</div><div class="line">Compare gameplay to appropriate games, even vintage titles | Use successful, modern games as comparative titles</div></pre></td></tr></table></figure></p>
+<p><strong>The Rule of Threes</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">THREE IS A MAGIC NUMBER</div></pre></td></tr></table></figure></p>
+<p><strong>Ten-Pager Outline</strong><br>PAGE 1: TITLE PAGE<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">•  Game title</div><div class="line">•  Intended game systems</div><div class="line">•  Target age of players</div><div class="line">•  Intended ESRB rating</div><div class="line">•  Projected ship date.</div><div class="line">Game Logos</div></pre></td></tr></table></figure></p>
+<p>PAGE 2: GAME OUTLINE<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">•  **Game story summary**</div><div class="line">•  **Game flow** Briefly describe the flow of the game&apos;s action in the context of the locations the player will find themselves in... who they are playing, the camera angle, and genre of gameplay as well as painting a picture of game locations and the player&apos;s goals.</div></pre></td></tr></table></figure></p>
+<p>PAGE 3: CHARACTER<br>PAGE 4: GAMEPLAY<br>PAGE 5: GAME WORLD<br>PAGE 6: GAME EXPERIENCE<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">•  What does the player first see when they start the game?</div><div class="line">•  What emotions/moods are meant to be invoked by your game?</div><div class="line">•  How is music and sound used to convey your game&apos;s feel?</div><div class="line">•  How does the player navigate the shell of the game? Include a simple flow chart diagram of how the player would navigate this interface. (You&apos;d be surprised how many games have lousy interfaces because the team never thought about it!)</div></pre></td></tr></table></figure></p>
+<p>PAGE 7: GAMEPLAY MECHANICS<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">A **mechanic** is something that the player interacts with to create or aid with gameplay...moving platforms, opening doors, rope swings, slippery ice.</div><div class="line">A **hazard** is a mechanic that can harm or kill the player but doesn&apos;t possess intelligence.</div><div class="line">A **power-up** is an item collected by the player to help them with gameplay.</div><div class="line">**Collectibles** are items that are collected by the player that don&apos;t have an immediate impact on gameplay.</div></pre></td></tr></table></figure></p>
+<p>PAGE 8: ENEMIES<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">If a hazard uses AI, then it qualifies as an **enemy character**. What enemies do we find in the game world? What makes them unique? How does the player overcome them?</div><div class="line">**Boss characters** are larger, more fearsome enemies usually found at the end of levels or chapters.</div></pre></td></tr></table></figure></p>
+<p>PAGE 9: CUTSCENES<br>PAGE 10: BONUS MATERIALS</p>
+<p>####### The Game Design Document<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">...eventually YOU will need to read your own GDD.</div><div class="line">...my team mates understood concepts quickly when I drew pictures for them.</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">•  Storyboards.</div><div class="line">•  Diagrams.</div><div class="line">•  Animatics.</div><div class="line">•  The beat chart.</div><div class="line">•  The team Wiki.</div></pre></td></tr></table></figure>
+<p><strong>EVERYTHING IS LIQUID</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">At a certain point, writing things down becomes counterproductive and it all becomes about finishing the game. But you need a starting point and a GDD gives you that launching pad from which to soar.</div><div class="line">...the MOST IMPORTANT PART OF A GAME DESIGNER&apos;S JOB IS COMMUNICATION.</div></pre></td></tr></table></figure></p>
+<p>####### Gameplay Progression</p>
+<p>…how the gameplay unfolds to the player over the course of the game. How this happens is called <strong>progression</strong>.</p>
+<p><strong>The Beat Chart</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">•  Clumping : too many new enemies or mechanics being introduced at once. Spread these out over the course of the game.</div><div class="line">•  Sameyness : too many identical combinations of enemies and mechanics. You want to mix things up to keep interaction fresh.</div><div class="line">•  Alternate your time of day and color schemes. If you have too many of the same lighting or color schemes in a row, things are going to feel and look repetitive.</div><div class="line">•  Alternate your music tracks. The player is going to get bored listening to the same music over and over again.</div><div class="line">•  Problems in game economy</div><div class="line">•  Mechanics and enemies should be introduced in conjunction with the items and abilities required to defeat them.</div><div class="line">•  When will the player have &quot;everything&quot; in the game?...75% through the game so the last quarter lets the player use all of their cool stuff.</div><div class="line">•  As a rule of thumb, I try to introduce two or three new mechanics, enemies, and rewards per level.</div></pre></td></tr></table></figure></p>
+<p><strong>Dont Be a Schmuck</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">•  A good idea can come from anywhere.</div><div class="line">•  Make a decision and stick with it.</div><div class="line">•  Update often.</div><div class="line">•  Tackle the tough ones first.</div><div class="line">•  Trust your instincts.</div><div class="line">•  Respect the abilities of your peers and be mindful of their limitations...talk to your team mates about what they&apos;d like to work on. </div><div class="line">•  Save often and always.</div><div class="line">•  Stay organized.</div><div class="line">•  Be prepared.</div></pre></td></tr></table></figure>
+<h5 id="Character"><a href="#Character" class="headerlink" title="Character"></a>Character</h5><p><strong>Three Cs</strong>:</p>
+<ol>
+<li>Character</li>
+<li>Camera</li>
+<li>Control<br>If you change any of the Three Cs during production, you risk massive problems with your gameplay.</li>
+</ol>
+<p><strong>FORM FOLLOWS FUNCTION</strong></p>
+<p>silhouette</p>
+<p>Personality**: Humorous character, Heroic character, Badass character</p>
+<p><strong>The power of customization</strong><br>…let the player customize their character furthers their feeling of ownership.</p>
+<p><strong>metrics</strong> </p>
+<p><strong>shadow</strong></p>
+<p><strong>second character</strong> playable or companion</p>
+<h5 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a>Camera</h5><h5 id="Controls"><a href="#Controls" class="headerlink" title="Controls"></a>Controls</h5><h5 id="HUD-and-Icon"><a href="#HUD-and-Icon" class="headerlink" title="HUD and Icon"></a>HUD and Icon</h5><p><strong>HUDs</strong> …be carefull of the “bracketing effect”…<br><strong>Loading screen</strong> concept art, trivia questions, game map, character bio…</p>
+<h5 id="Level-Design"><a href="#Level-Design" class="headerlink" title="Level Design"></a>Level Design</h5><h5 id="Mechanics"><a href="#Mechanics" class="headerlink" title="Mechanics"></a>Mechanics</h5>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2018/01/04/20180104-LevelUp/" data-id="cji3wkjhj00107wqiy40a9r49" class="article-share-link"><i class="fas fa-share"></i>分享</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/04/19/20180419-TAThoughts/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    省电策略
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/01/03/20180103-ArtofGameDesign/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">游戏设计艺术读书笔记 Notes of Art of Game Design</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/26/20180526-ApproximateSSS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/img/sssChunli.png)" alt="半透效果皮肤 (Aproximate Subserface-Scattering)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/05/26/20180526-ApproximateSSS/" class="title">半透效果皮肤 (Aproximate Subserface-Scattering)</a></p>
+                            <p class="item-date"><time datetime="2018-05-25T16:00:00.000Z" itemprop="datePublished">2018-05-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/25/20180525-BRDF/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/05/25/20180525-BRDF/" class="title">Shader - PBR BRDF</a></p>
+                            <p class="item-date"><time datetime="2018-05-24T16:00:00.000Z" itemprop="datePublished">2018-05-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/25/20180425-RulesofPlay/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/25/20180425-RulesofPlay/" class="title">Rules of Play 读书笔记</a></p>
+                            <p class="item-date"><time datetime="2018-04-24T16:00:00.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/19/20180419-TAThoughts/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/19/20180419-TAThoughts/" class="title">省电策略</a></p>
+                            <p class="item-date"><time datetime="2018-04-18T16:00:00.000Z" itemprop="datePublished">2018-04-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/04/20180104-LevelUp/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/04/20180104-LevelUp/" class="title">Level Up 读书笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-03T16:00:00.000Z" itemprop="datePublished">2018-01-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game-Dev/">Game Dev</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/">Unity</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a><span class="tag-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Game-Dev/" style="font-size: 16.67px;">Game Dev</a> <a href="/tags/Graphics/" style="font-size: 20px;">Graphics</a> <a href="/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/tags/读书笔记/" style="font-size: 13.33px;">读书笔记</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="/breezybay">Breezy Bay</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://zhanstudio.weebly.com">ZhanStudio (旧博客)</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Breezy Bay<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"scale":1,"jsonPath":"/live2dw/assets/Epsilon2.1.model.json"},"display":{"position":"left","width":256,"height":512,"vOffset":-100},"mobile":{"show":true}});</script></body>
+</html>

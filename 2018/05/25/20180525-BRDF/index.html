@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Shader - PBR BRDF | Breezy Bay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="参考Unity的Standard Shader直接写个BRDF PBS的fragment shader，作为基础方便以后修改。 v2f结构12345678struct v2f &amp;#123;	float4 pos : SV_POSITION;	half4 pack0 : TEXCOORD0; // _MainTex _BumpMap	half3 viewDir : TEXCOORD01;	half3">
+<meta name="keywords" content="Graphics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shader - PBR BRDF">
+<meta property="og:url" content="/2018/05/25/20180525-BRDF/index.html">
+<meta property="og:site_name" content="Breezy Bay">
+<meta property="og:description" content="参考Unity的Standard Shader直接写个BRDF PBS的fragment shader，作为基础方便以后修改。 v2f结构12345678struct v2f &amp;#123;	float4 pos : SV_POSITION;	half4 pack0 : TEXCOORD0; // _MainTex _BumpMap	half3 viewDir : TEXCOORD01;	half3">
+<meta property="og:updated_time" content="2018-06-04T10:47:58.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shader - PBR BRDF">
+<meta name="twitter:description" content="参考Unity的Standard Shader直接写个BRDF PBS的fragment shader，作为基础方便以后修改。 v2f结构12345678struct v2f &amp;#123;	float4 pos : SV_POSITION;	half4 pack0 : TEXCOORD0; // _MainTex _BumpMap	half3 viewDir : TEXCOORD01;	half3">
+    
+
+    
+
+    
+        <link rel="icon" href="/img/logo40.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Breezy Bay</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/games">Games</a>
+                
+                    <a class="main-nav-link" href="/misc">Misc</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/img/Ruby_idle_214.png" />
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/games">Games</a></td>
+                
+                    <td><a class="main-nav-link" href="/misc">Misc</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/img/Ruby_idle_214.png" />
+            <h2 id="name">甩萝卜兔 (Robotu)</h2>
+            <h3 id="title">Game Developer</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Hangzhou, China</span>
+            <!-- <a id="follow" target="_blank" href="">关注</a> -->
+        </div>
+<!--         <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                4
+                <span>标签</span>
+            </div>
+        </div> -->
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://www.linkedin.com/in/arnfinch/" target="_blank" title="linkedin" class=tooltip>
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://weibo.com/arnzhan" target="_blank" title="weibo" class=tooltip>
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-20180525-BRDF" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Shader - PBR BRDF
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/05/25/20180525-BRDF/">
+            <time datetime="2018-05-24T16:00:00.000Z" itemprop="datePublished">2018-05-25</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Graphics/">Graphics</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>参考Unity的Standard Shader直接写个BRDF PBS的fragment shader，作为基础方便以后修改。</p>
+<h3 id="v2f结构"><a href="#v2f结构" class="headerlink" title="v2f结构"></a>v2f结构</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">v2f</span> &#123;</span></div><div class="line">	float4 pos : SV_POSITION;</div><div class="line">	half4 pack0 : TEXCOORD0; <span class="comment">// _MainTex _BumpMap</span></div><div class="line">	half3 viewDir : TEXCOORD01;</div><div class="line">	half3 worldPos : TEXCOORD2;</div><div class="line">	half3x3 tangentToWorld : TEXCOORD3;    <span class="comment">// [3x3:tangentToWorld | 1x3:viewDirForParallax or worldPos]</span></div><div class="line">	SHADOW_COORDS(<span class="number">6</span>)</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="顶点"><a href="#顶点" class="headerlink" title="顶点"></a>顶点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/// Vertex</div><div class="line">v2f vert (appdata_full v)</div><div class="line">&#123;</div><div class="line">	...</div><div class="line"></div><div class="line">	o.pos = UnityObjectToClipPos(v.vertex);</div><div class="line">	o.pack0.xy = TRANSFORM_TEX(v.texcoord, _MainTex);</div><div class="line">	o.pack0.zw = TRANSFORM_TEX(v.texcoord, _BumpMap);</div><div class="line"></div><div class="line">	...</div><div class="line"></div><div class="line">	// half3x3(tangent, binormal, normal)</div><div class="line">	o.tangentToWorld = CreateTangentToWorldPerVertex(worldNormal, worldTangent.xyz, worldTangent.w);</div><div class="line"></div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>把uv都pack到TEXCOORD0</li>
+<li>在顶点处建立tangentToWorld矩阵</li>
+</ul>
+<h3 id="BRDF"><a href="#BRDF" class="headerlink" title="BRDF"></a>BRDF</h3><p>UnityStandardBRDF.cginc 的 BRDF1_Unity_PBS</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">if</span> UNITY_HANDLE_CORRECTLY_NEGATIVE_NDOTV</span></div><div class="line"><span class="comment">// The amount we shift the normal toward the view vector is defined by the dot product.</span></div><div class="line">half shiftAmount = dot(normal, viewDir);</div><div class="line">normal = shiftAmount &lt; <span class="number">0.0f</span> ? normal + viewDir * (-shiftAmount + <span class="number">1e-5</span>f) : normal;</div><div class="line"><span class="comment">// A re-normalization should be applied here but as the shift is small we don't do it to save ALU.</span></div><div class="line"><span class="comment">//normal = normalize(normal);</span></div><div class="line"></div><div class="line">half nv = saturate(dot(normal, viewDir)); <span class="comment">// <span class="doctag">TODO:</span> this saturate should no be necessary here</span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line">half nv = <span class="built_in">abs</span>(dot(normal, viewDir));    <span class="comment">// This abs allow to limit artifact</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line">half nl = saturate(dot(normal, lightDir));</div><div class="line">half nh = saturate(dot(normal, halfDir));</div><div class="line"></div><div class="line">half lv = saturate(dot(lightDir, viewDir));</div><div class="line">half lh = saturate(dot(lightDir, halfDir));</div><div class="line"></div><div class="line">half diffuseTerm = DisneyDiffuse(nv, nl, lh, perceptualRoughness) * nl;</div><div class="line"></div><div class="line">half roughness = PerceptualRoughnessToRoughness(perceptualRoughness);</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">if</span> UNITY_BRDF_GGX</span></div><div class="line">half V = SmithJointGGXVisibilityTerm (nl, nv, roughness);</div><div class="line">half D = GGXTerm (nh, roughness);</div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line"><span class="comment">// Legacy</span></div><div class="line">half V = SmithBeckmannVisibilityTerm (nl, nv, roughness);</div><div class="line">half D = NDFBlinnPhongNormalizedTerm (nh, PerceptualRoughnessToSpecPower(perceptualRoughness));</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line">half specularTerm = V * D * UNITY_PI; <span class="comment">// Torrance-Sparrow model, Fresnel is applied later</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> UNITY_COLORSPACE_GAMMA</span></div><div class="line">specularTerm = <span class="built_in">sqrt</span>(max(<span class="number">1e-4</span>h, specularTerm));</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="comment">// specularTerm * nl can be NaN on Metal in some cases, use max() to make sure it's a sane value</span></div><div class="line">specularTerm = max(<span class="number">0</span>, specularTerm * nl);</div><div class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(_SPECULARHIGHLIGHTS_OFF)</span></div><div class="line">specularTerm = <span class="number">0.0</span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<h3 id="Metallic-amp-Specular"><a href="#Metallic-amp-Specular" class="headerlink" title="Metallic &amp; Specular"></a>Metallic &amp; Specular</h3><p>Metallic<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fixed4 metallicGlossTex = tex2D(_MetallicGlossMap, uv);</div><div class="line">half metallic = _Metallic * metallicGlossTex.r;</div><div class="line">half smoothness = _Glossiness * metallicGlossTex.a;</div><div class="line"></div><div class="line">half oneMinusDielectricSpec = unity_ColorSpaceDielectricSpec.a;</div><div class="line">half oneMinusReflectivity = oneMinusDielectricSpec - metallic * oneMinusDielectricSpec;</div><div class="line">fixed3 specColor = lerp (unity_ColorSpaceDielectricSpec.rgb, tex.rgb, metallic);</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">half3 diffColor = tex * oneMinusReflectivity * occ;</div></pre></td></tr></table></figure></p>
+<p>Specular<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">fixed4 specTex = tex2D(_SpecGlossMap, uv);</div><div class="line">fixed3 specColor = specTex.rgb;</div><div class="line">half smoothness = _Glossiness * specTex.a;</div><div class="line"></div><div class="line">half oneMinusReflectivity = <span class="number">1</span> - SpecularStrength(specColor);</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line"><span class="comment">// EnergyConservationBetweenDiffuseAndSpecular</span></div><div class="line">half3 diffColor = tex * (half3(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>) - specColor) * occ;</div></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2018/05/25/20180525-BRDF/" data-id="cji3wkjhj000s7wqikux0mk3v" class="article-share-link"><i class="fas fa-share"></i>分享</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/05/26/20180526-ApproximateSSS/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    半透效果皮肤 (Aproximate Subserface-Scattering)
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/04/25/20180425-RulesofPlay/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Rules of Play 读书笔记</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/26/20180526-ApproximateSSS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/img/sssChunli.png)" alt="半透效果皮肤 (Aproximate Subserface-Scattering)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/05/26/20180526-ApproximateSSS/" class="title">半透效果皮肤 (Aproximate Subserface-Scattering)</a></p>
+                            <p class="item-date"><time datetime="2018-05-25T16:00:00.000Z" itemprop="datePublished">2018-05-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/25/20180525-BRDF/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/05/25/20180525-BRDF/" class="title">Shader - PBR BRDF</a></p>
+                            <p class="item-date"><time datetime="2018-05-24T16:00:00.000Z" itemprop="datePublished">2018-05-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/25/20180425-RulesofPlay/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/25/20180425-RulesofPlay/" class="title">Rules of Play 读书笔记</a></p>
+                            <p class="item-date"><time datetime="2018-04-24T16:00:00.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/19/20180419-TAThoughts/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/19/20180419-TAThoughts/" class="title">省电策略</a></p>
+                            <p class="item-date"><time datetime="2018-04-18T16:00:00.000Z" itemprop="datePublished">2018-04-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/04/20180104-LevelUp/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/04/20180104-LevelUp/" class="title">Level Up 读书笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-03T16:00:00.000Z" itemprop="datePublished">2018-01-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game-Dev/">Game Dev</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/">Unity</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a><span class="tag-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Game-Dev/" style="font-size: 16.67px;">Game Dev</a> <a href="/tags/Graphics/" style="font-size: 20px;">Graphics</a> <a href="/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/tags/读书笔记/" style="font-size: 13.33px;">读书笔记</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="/breezybay">Breezy Bay</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://zhanstudio.weebly.com">ZhanStudio (旧博客)</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Breezy Bay<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"scale":1,"jsonPath":"/live2dw/assets/Epsilon2.1.model.json"},"display":{"position":"left","width":256,"height":512,"vOffset":-100},"mobile":{"show":true}});</script></body>
+</html>
